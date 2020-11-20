@@ -1,6 +1,6 @@
 import torch
 from ignite.metrics.metric import Metric
-import np
+import numpy as np
 
 class MultiThresholdMeasures(Metric):
     """
