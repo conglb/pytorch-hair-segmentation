@@ -1,5 +1,6 @@
 import torch
 from ignite.metrics.metric import Metric
+import np
 
 class MultiThresholdMeasures(Metric):
     """
@@ -33,8 +34,8 @@ class MultiThresholdMeasures(Metric):
 
         self._tp += torch.sum(tp, dim=[0,1]).float()
         self._tn += torch.sum(tn, dim=[0,1]).float()
-        self._fp += torch.sum(fp, dim=[0,1]).float()
-        self._fn += torch.sum(fn, dim=[0,1]).float()
+        self._fp += fp#torch.sum(fp, dim=[0,1]).float()
+        self._fn += fn#torch.sum(fn, dim=[0,1]).float()
 
     def compute(self):
         return
