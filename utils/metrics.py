@@ -28,8 +28,8 @@ class MultiThresholdMeasures(Metric):
 
         tp = y_pred * y == 1
         tn = y_pred + y == 0
-        fp = y_pred - y == 1
-        fn = y - y_pred == 1
+        fp = np.sum( (y_pred==1) & (y == 0) ) #y_pred - y == 1
+        fn = np.sum( (y_pred==0) & (y == 1) ) #y - y_pred == 1
 
         self._tp += torch.sum(tp, dim=[0,1]).float()
         self._tn += torch.sum(tn, dim=[0,1]).float()
