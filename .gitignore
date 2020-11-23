@@ -148,7 +148,7 @@ Lfw/
 
 # log and ckpt
 logs/
-ckpt/
+#ckpt/
 
 .vscode/
 .vscode/*
