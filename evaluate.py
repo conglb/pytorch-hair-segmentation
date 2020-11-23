@@ -20,11 +20,11 @@ def str2bool(s):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--ckpt_dir', help='path to ckpt file',type=str,
-            default='./models/pspnet_resnet101_sgd_lr_0.002_epoch_100_test_iou_0.918.pth')
+            default='./ckpt/mobilenet_adam_lr_0.0001_epoch_200.pth')
     parser.add_argument('--dataset', type=str, default='figaro',
             help='Name of dataset you want to use default is "figaro"')
     parser.add_argument('--data_dir', help='path to Figaro1k folder', type=str, default='./data/Figaro1k')
-    parser.add_argument('--networks', help='name of neural network', type=str, default='pspnet_resnet101')
+    parser.add_argument('--networks', help='name of neural network', type=str, default='mobilenet')
     parser.add_argument('--save_dir', default='./overlay',
             help='path to save overlay images, default=None and do not save images in this case')
     parser.add_argument('--use_gpu', type=str2bool, default=True,
