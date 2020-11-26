@@ -203,7 +203,7 @@ class HairMattingLoss(nn.modules.loss._Loss):
             loss2 = torch.sum(torch.mul(G, rang_grad))/torch.sum(G) + 1e-6
         
         if self.add_gradient:
-            loss = (1-self.ratio_of_gradient)*self.bce_loss(pred, true) + loss2*self.ratio_of_gradient
+            loss = self.bce_loss(pred, true) + loss2*self.ratio_of_gradient
         else:
             loss = self.bce_loss(pred, true)
 
