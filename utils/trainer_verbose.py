@@ -132,7 +132,7 @@ def train_with_ignite(networks, dataset, data_dir, batch_size, img_size,
         # evaluate on training set
         evaluator.run(train_loader)
         metrics = evaluator.state.metrics
-        logger.info("Training Results - Epoch: {} Avg-loss: {:.3f}\n Pix-acc: {}\n IoU: {}\n F1: {}\n".format(
+        logger.info("Training Results - Epoch: {} Avg-loss: {:.3f}\n Pix-acc: {}\n IOU: {}\n F1: {}\n".format(
             trainer.state.epoch, metrics['loss'], str(metrics['pix-acc']), str(metrics['iou']), str(metrics['f1'])))
 
         # update state
@@ -149,7 +149,7 @@ def train_with_ignite(networks, dataset, data_dir, batch_size, img_size,
         # evaluate test(validation) set
         evaluator.run(test_loader)
         metrics = evaluator.state.metrics
-        logger.info("Validation Results - Epoch: {} Avg-loss: {:.3f}\n Pix-acc: {}\n IoU: {}\n F1: {}\n".format(
+        logger.info("Validation Results - Epoch: {} Avg-loss: {:.3f}\n Pix-acc: {}\n IOU: {}\n F1: {}\n".format(
             trainer.state.epoch, metrics['loss'], str(metrics['pix-acc']), str(metrics['iou']), str(metrics['f1'])))
 
         # update scheduler
@@ -269,7 +269,7 @@ def train_without_ignite(model, loss, batch_size, img_size,
             epoch_loss = running_loss / len(data_loader[phase])
             
             if phase == 'train':
-                logger.info(f"Training Results - Epoch: {epoch} Avg-loss: {epoch_loss:.3f}")
+                logger.info(f"TRaining Results - Epoch: {epoch} Avg-loss: {epoch_loss:.3f}")
                 if viz:
                     vis.images([
                         np.clip(pred_mask.detach().cpu().numpy()[0],0,1),
@@ -282,7 +282,7 @@ def train_without_ignite(model, loss, batch_size, img_size,
                         np.clip(pred_mask.detach().cpu().numpy()[0],0,1),
                         mask.detach().cpu().numpy()[0]
                     ], opts=dict(title=f'pred img for {epoch}-th iter'))
-                logger.info(f"Test Results - Epoch: {epoch} Avg-loss: {epoch_loss:.3f}")
+                logger.info(f"TEst Results - Epoch: {epoch} Avg-loss: {epoch_loss:.3f}")
                 
                 if scheduler: scheduler.step(epoch_loss)
             
