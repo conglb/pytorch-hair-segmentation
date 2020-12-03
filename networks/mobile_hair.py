@@ -167,7 +167,7 @@ class MobileMattingFCN(nn.Module):
         # hell baidu - https://github.com/marvis/pytorch-mobilenet
 
 class HairMattingLoss(nn.modules.loss._Loss):
-    def __init__(self, ratio_of_Gradient=0.0, add_gradient=False):
+    def __init__(self, ratio_of_Gradient=0.3, add_gradient=True):
         super(HairMattingLoss, self).__init__()
         self.ratio_of_gradient = ratio_of_Gradient
         self.add_gradient = add_gradient
@@ -201,10 +201,13 @@ class HairMattingLoss(nn.modules.loss._Loss):
             rang_grad = range_grad if rang_grad > 0 else 0
 
             loss2 = torch.sum(torch.mul(G, rang_grad))/torch.sum(G) + 1e-6
+            print("Gradient loss: {}".format(loss2))
         
+        loss1 = self.bce_loss(pred, true)
+        print("BCE loss: {}".format(loss1))
         if self.add_gradient:
-            loss = (1-self.ratio_of_gradient)*self.bce_loss(pred, true) + loss2*self.ratio_of_gradient
+            loss = loss1 + loss2*self.ratio_of_gradient
         else:
-            loss = self.bce_loss(pred, true)
+            loss = loss1
 
         return loss
